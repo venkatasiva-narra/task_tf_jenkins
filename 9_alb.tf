@@ -13,13 +13,13 @@ resource "aws_lb_target_group" "my_target_group" {
   port        = 80
   protocol    = "HTTP"
   target_type = "instance"
-  # vpc_id      = "${my_vpc.task_vpc.id}"
+  vpc_id      = "${aws_vpc.task_vpc.id}"
 }
 
 resource "aws_lb" "my_aws_alb" {
   name     = "my-aws-alb"
   internal = false
-  subnets  = [aws_subnet.task_public_subnet_1.id]
+  subnets  = [aws_subnet.task_public_subnet_1.id,aws_subnet.task_public_subnet_2.id]
 
   tags = {
     Name = "my_aws_alb"
